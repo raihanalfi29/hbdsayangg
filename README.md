@@ -1,1 +1,239 @@
-# hbdsayangg
+
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Selamat Ulang Tahun, Sayang!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;700&display=swap');
+  /* Reset dan dasar */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #ffe1e8 0%, #ffcad4 50%, #ffb3c1 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #4a2c3b;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #9e3050;
+    text-shadow: 0 0 10px #e75480aa;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    text-align: center;
+    color: #7f4057;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 25px;
+    padding: 30px 40px;
+    max-width: 480px;
+    box-shadow: 0 10px 25px rgba(209, 91, 123, 0.3);
+    position: relative;
+    z-index: 2;
+  }
+
+  p.pesan {
+    margin: 20px 0 30px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center;
+    color: #702c42;
+  }
+
+  /* Gambar romantis */
+  .gambar-romantis {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 18px rgba(161, 81, 115, 0.4);
+    margin-top: 20px;
+  }
+
+  /* Kontainer hati mengapung */
+  .hati {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hati-bentuk {
+    position: absolute;
+    bottom: -40px;
+    width: 20px;
+    height: 20px;
+    background: #e75480;
+    transform: rotate(-45deg);
+    animation-name: mengapungKeAtas;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 2px #f37ea7);
+  }
+
+  .hati-bentuk::before,
+  .hati-bentuk::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #e75480;
+    border-radius: 50%;
+  }
+
+  .hati-bentuk::before {
+    top: -10px;
+    left: 0;
+  }
+
+  .hati-bentuk::after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes mengapungKeAtas {
+    0% {
+      transform: translateY(0) rotate(-45deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-600px) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Tombol audio */
+  .audio-control {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .audio-control button {
+    background: #e75480;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(231, 84, 128, 0.5);
+    transition: background-color 0.3s ease;
+  }
+  .audio-control button:hover {
+    background: #d04875;
+  }
+
+  /* Responsif untuk mobile */
+  @media (max-width: 600px) {
+    body {
+      padding: 12px;
+    }
+    h1 {
+      font-size: 2.8rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+    }
+    .container {
+      max-width: 90vw;
+      padding: 25px 25px 30px 25px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Ulang Tahun, Sayangku!</h1>
+    <h2>
+      <?php
+        // Salam personal dengan tanggal sekarang
+        date_default_timezone_set('Asia/Jakarta');
+        echo "Hari ini tanggal " . date('d-m-Y');
+      ?>
+    </h2>
+    <p class="pesan">
+      Semoga hari ulang tahunmu dipenuhi dengan kebahagiaan, cinta, dan harapan yang indah.<br>
+      Aku sangat beruntung memilikimu di hidupku. Terima kasih sudah menjadi cahaya dalam duniaku.<br>
+      Aku mencintaimu selamanya. ❤️
+    </p>
+    <img class="gambar-romantis" loading="lazy" alt="Bunga Romantis"
+      src="https://images.unsplash.com/photo-1465188162913-8fb18a7f4c6e?auto=format&fit=crop&w=600&q=80" />
+    <div class="audio-control">
+      <button type="button" id="toggleAudio">Putar Lagu: You'll Be In My Heart ❤️</button>
+      <audio id="music" loop preload="auto" >
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_117874c04f.mp3?filename=sweet-love-theme-4843.mp3" type="audio/mpeg" />
+        Browser anda tidak mendukung audio.
+      </audio>
+    </div>
+  </div>
+
+  <div class="hati" aria-hidden="true"></div>
+
+<script>
+  // JavaScript untuk membuat efek hati mengapung
+  const containerHati = document.querySelector('.hati');
+
+  function buatHati() {
+    const hati = document.createElement('div');
+    hati.classList.add('hati-bentuk');
+    // Posisi horizontal random
+    hati.style.left = Math.random() * 100 + 'vw';
+    // Ukuran random antara 10px sampai 25px
+    const ukuran = Math.random() * 15 + 10;
+    hati.style.width = ukuran + 'px';
+    hati.style.height = ukuran + 'px';
+    hati.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    hati.style.opacity = Math.random();
+
+    containerHati.appendChild(hati);
+
+    setTimeout(() => {
+      hati.remove();
+    }, 6000);
+  }
+
+  // Buat hati tiap 300ms
+  setInterval(buatHati, 300);
+
+  // Audio kontrol tombol
+  const audio = document.getElementById('music');
+  const toggleBtn = document.getElementById('toggleAudio');
+  let playing = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (!playing) {
+      audio.play();
+      toggleBtn.textContent = "Jeda Lagu 🎵";
+      playing = true;
+    } else {
+      audio.pause();
+      toggleBtn.textContent = "Putar Lagu: You'll Be In My Heart ❤️";
+      playing = false;
+    }
+  });
+</script>
+</body>
+</html>
+
